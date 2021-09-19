@@ -1,0 +1,12 @@
+--add account
+--INSERT INTO teacher (login,  password, last_name, patronymic, email, phone)
+--VALUES ('teacherName', 'teacherName', 'teacherName', '', 'teacherName@gmail.com', '1');
+--
+--String login;
+--    String password;
+--    String name;
+--    String surname;
+--    AccountRole role;
+--    Timestamp createdDate;
+--    Timestamp lastLoginAt;
+--    String customerInvoiceId;

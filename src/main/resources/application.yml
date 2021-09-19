@@ -1,0 +1,59 @@
+server:
+  port: 8080
+
+server-url: http://localhost:8080
+server-route:
+
+database:
+  host: localhost
+  port: 5432
+  username: comp
+  password: comp
+  database: comp_management
+  schema: comp_management
+  pool:
+    maxIdleTimeInMinutes: 5
+    maxSize: 30
+
+spring:
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/comp_management
+    password: comp
+    user: comp
+    schemas: comp_management
+    main:
+      allow-bean-definition-overriding: true
+
+security:
+  jwt:
+    secret: ThisIsSecretForJWTHS512SignatureAlgorithmThatMUSTHave64ByteLength
+    expiration: 864000000
+    enable-actuator: true
+    basic-username: prometheus
+    basic-password: prometheus
+    public-path:
+      - /comp/doc/**
+      - /comp/api/v1/accounts/**
+  encoder:
+    secret: mysecret
+    iteration: 33
+    keylength: 256
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /comp/doc/api-docs
+  swagger-ui:
+    enabled: true
+    path: /comp/doc/swagger-ui.html
+    operationsSorter: alpha
+
+stripe:
+  api:
+    url: https://api.stripe.com/v1
+    test-token: Bearer sk_test_51JbLQTIFX9QksJzEzVt1e6fZJfoJ4ly3F1VHrxmgQpv5g3gtBuGFScLbxMzF7ymcFjRDWlQeOaKf4lN51RghGZjF00NAf0WVHR
+    auth: Authorization
+    invoices: /invoices
+    invoiceitems: /invoiceitems
+    customers: /customers

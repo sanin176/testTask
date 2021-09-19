@@ -1,0 +1,53 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.4'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.comp'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '16'
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('openapi_webflux_ui', "1.4.3")
+	set('mapstruct', "1.4.2.Final")
+	set('jwt', "0.11.1")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation "org.springdoc:springdoc-openapi-webflux-ui:${openapi_webflux_ui}"
+
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+
+	annotationProcessor 'org.springframework.boot:spring-boot-autoconfigure-processor'
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+	implementation "io.jsonwebtoken:jjwt-api:${jwt}"
+	runtimeOnly "io.jsonwebtoken:jjwt-impl:${jwt}"
+	runtimeOnly "io.jsonwebtoken:jjwt-jackson:${jwt}"
+
+	implementation 'org.flywaydb:flyway-core'
+	implementation 'org.springframework:spring-jdbc'
+	compileOnly 'org.projectlombok:lombok'
+	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'io.r2dbc:r2dbc-postgresql'
+
+	implementation 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation "org.mapstruct:mapstruct:${mapstruct}"
+	annotationProcessor "org.mapstruct:mapstruct-processor:${mapstruct}"
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+	useJUnitPlatform()
+}
