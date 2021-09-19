@@ -45,10 +45,6 @@ public class JWTUtil {
         }
     }
 
-    public String getUsernameFromToken(String token) {
-        return getAllClaimsFromToken(token).getSubject();
-    }
-
     public Date getExpirationDateFromToken(String token) {
         return getAllClaimsFromToken(token).getExpiration();
     }
@@ -63,13 +59,6 @@ public class JWTUtil {
         claims.put("username", username);
         claims.put("role", role);
         return doGenerateToken(claims, username);
-    }
-
-    public String generateRefreshToken(String fingerprint, String username) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("fingerprint", fingerprint);
-        claims.put("username", username);
-        return doGenerateRefreshToken(claims, fingerprint);
     }
 
     private String doGenerateToken(Map<String, Object> claims, String username) {
@@ -87,27 +76,6 @@ public class JWTUtil {
                 .setIssuedAt(createdDate)
                 .setExpiration(expirationDate)
                 .signWith(key)
-                .compact();
-    }
-
-    private String doGenerateRefreshToken(Map<String, Object> claims, String fingerprint) {
-        if (refreshKey == null) {
-            throw new RuntimeException("you need to initialize the variable 'refreshSecret' in config file");
-        }
-        if (jwtProperties.getExpiration() == null) {
-            throw new RuntimeException("you need to initialize the variable 'refreshExpiration' in config file");
-        }
-        long expirationTimeLong = Long.parseLong(jwtProperties.getRefreshExpiration()); //in second
-
-        final Date createdDate = new Date();
-        final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong);
-
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(fingerprint)
-                .setIssuedAt(createdDate)
-                .setExpiration(expirationDate)
-                .signWith(refreshKey)
                 .compact();
     }
 

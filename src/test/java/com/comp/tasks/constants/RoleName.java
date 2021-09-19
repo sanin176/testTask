@@ -1,4 +1,4 @@
-package com.guardex.sphere.schooltest.constants;
+package com.comp.tasks.constants;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -11,7 +11,9 @@ import java.util.Map;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @AllArgsConstructor
 public enum RoleName {
-    TEACHER_NAME("teacherName", "TEACHER");
+    ROLE_OWNER("owner", "ROLE_OWNER"),
+    ROLE_ADMIN("admin", "ROLE_ADMIN"),
+    ROLE_USER("user", "ROLE_USER");
 
     @Getter
     String name;

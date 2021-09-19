@@ -7,9 +7,9 @@ server-route:
 database:
   host: localhost
   port: 5432
-  username: comp
-  password: comp
-  database: comp_management
+  username: comp_test
+  password: comp_test
+  database: comp_management_test
   schema: comp_management
   pool:
     maxIdleTimeInMinutes: 5
@@ -18,12 +18,12 @@ database:
 spring:
   flyway:
     enabled: true
-    url: jdbc:postgresql://localhost:5432/comp_management
-    password: comp
-    user: comp
-    schemas: comp_management
-    main:
-      allow-bean-definition-overriding: true
+    url: jdbc:postgresql://${database.host}:${database.port}/${database.database}
+    password: ${database.password}
+    user: ${database.username}
+    schemas: ${database.schema}
+  main:
+    allow-bean-definition-overriding: true
 
 security:
   jwt:
@@ -33,8 +33,7 @@ security:
     basic-username: prometheus
     basic-password: prometheus
     public-path:
-      - /comp/doc/**
-      - /comp/api/v1/accounts/**
+      - /doc/**
   encoder:
     secret: mysecret
     iteration: 33

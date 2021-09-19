@@ -16,6 +16,7 @@ ext {
 	set('openapi_webflux_ui', "1.4.3")
 	set('mapstruct', "1.4.2.Final")
 	set('jwt', "0.11.1")
+	set('test_container', "1.15.2")
 }
 
 dependencies {
@@ -45,7 +46,34 @@ dependencies {
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation 'org.testcontainers:junit-jupiter'
+	testImplementation 'org.testcontainers:postgresql'
+	testImplementation 'org.testcontainers:r2dbc'
+
+	testCompileOnly 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
 	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	testImplementation "org.testcontainers:testcontainers:${test_container}"
+	testImplementation 'io.projectreactor:reactor-test'
+	testImplementation "org.flywaydb.flyway-test-extensions:flyway-spring-test:7.0.0"
+	testImplementation "org.testcontainers:r2dbc:${test_container}"
+	testImplementation "org.testcontainers:postgresql:${test_container}"
+	testImplementation "org.testcontainers:testcontainers:${test_container}"
+	testImplementation 'org.assertj:assertj-core:3.17.2'
+	testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		exclude group: 'junit', module: 'junit'
+	}
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.testcontainers:testcontainers-bom:${test_container}"
+	}
 }
 
 test {

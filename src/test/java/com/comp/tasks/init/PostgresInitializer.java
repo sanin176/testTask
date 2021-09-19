@@ -1,4 +1,4 @@
-package com.innowise.hrm.employeemanagement.init;
+package com.comp.tasks.init;
 
 import io.r2dbc.spi.ConnectionFactoryOptions;
 import org.springframework.boot.test.util.TestPropertyValues;
@@ -10,9 +10,9 @@ import org.testcontainers.containers.PostgreSQLR2DBCDatabaseContainer;
 public class PostgresInitializer implements ApplicationContextInitializer<ConfigurableApplicationContext> {
 
     private static final String IMAGE = "postgres:latest";
-    private static final String TEST_DATABASE = "employee_management_test";
-    private static final String USER_NAME = "employee_test";
-    private static final String PASSWORD = "employee_test";
+    private static final String TEST_DATABASE = "comp_management_test";
+    private static final String USER_NAME = "comp_test";
+    private static final String PASSWORD = "comp_test";
     private static final Integer PORT = 5432;
 
     private final PostgreSQLContainer postgresContainer = new PostgreSQLContainer<>(IMAGE)
